@@ -1,0 +1,30 @@
+{% load highlight_words %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Список отзывов</title>
+</head>
+<body>
+  <div class="container">
+{% block content %}
+    <h1>Отзывы</h1>
+    {% for review in reviews %}
+        <div class="review">
+            <p>{{ review.processed_text|highlight_words}}</p>
+            <p>Дата: {{ review.date|date:"Y-m-d"}}</p>
+             {% if review.user %}
+            <p>Username: {{ review.user }}</p>
+            {% endif %}
+            <p>ФИО врача: {{ review.doctor }}</p>
+            <p>Специальности: {{ review.doctor.specialties.all|join:", " }}</p>
+        </div>
+        <hr>
+    {% empty %}
+        <p>Нет доступных отзывов.</p>
+    {% endfor %}
+{% endblock %}
+  </div>
+</body>
+</html>

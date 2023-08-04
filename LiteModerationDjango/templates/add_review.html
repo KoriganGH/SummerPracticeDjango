@@ -1,0 +1,11 @@
+ <title>Оставить отзыв</title>
+{% block content %}
+  <h1>Оставить отзыв</h1>
+  <h2>{{ doctor.full_name }}</h2>
+  <p>{{ specialties }}</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Отправить отзыв</button>
+  </form>
+{% endblock %}
